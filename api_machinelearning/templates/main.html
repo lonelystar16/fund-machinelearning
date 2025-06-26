@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predictor de Desempeño</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; background-color: #f4f4f9; }
+        h1, h2 { color: #333; }
+        form { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        fieldset { border: 1px solid #ccc; padding: 15px; }
+        legend { font-weight: bold; }
+        input[type="number"] { width: 200px; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        input[type="submit"] { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #0056b3; }
+        .result { margin-top: 20px; padding: 15px; background-color: #e2e3e5; border-left: 5px solid #007bff; }
+    </style>
+</head>
+<body>
+    <h1>Predictor de Desempeño del Jugador</h1>
+    <p>Introduce los datos para predecir si el jugador tendrá un alto desempeño.</p>
+
+    <form action="{{ url_for('main') }}" method="POST">
+        <fieldset>
+            <legend>Datos de la Partida</legend>
+            Muertes por Flanqueo (MatchFlankKills): <input name="MatchFlankKills" type="number" step="any" required><br>
+            Valor Equipo Total (TeamStartingEquipmentValue): <input name="TeamStartingEquipmentValue" type="number" step="any" required><br>
+            <br>
+            <input type="submit" value="Predecir">
+        </fieldset>
+    </form>
+
+    <br>
+    
+    {% if result %}
+        <div class="result">
+            <h2>Resultado de la Predicción:</h2>
+            <p>Con los datos introducidos, el modelo predice que el jugador tendrá:</p>
+            <p><b>{{ result }}</b></p>
+        </div>
+    {% endif %}
+
+</body>
+</html>
